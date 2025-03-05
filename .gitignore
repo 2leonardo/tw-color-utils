@@ -1,0 +1,46 @@
+# compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# dependencies
+/node_modules
+/vendor
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# logs and databases
+*.log
+*.sql
+*.sqlite
+
+# os generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# misc
+*.pem
+
+# build
+/build
+/out
+/dist

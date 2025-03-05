@@ -1,0 +1,24 @@
+{
+  "name": "@2leonardo/tw-color-utils",
+  "version": "1.0.2",
+  "main": "dist/index.js",
+  "author": "2leonardo",
+  "license": "MIT",
+  "description": "A set of color utility functions following the tokens approach to generate tailwind v4 colors",
+  "scripts": {
+    "prepare": "husky",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "husky": "^9.1.7",
+    "typescript": "^5.8.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2leonardo/tw-color-utils.git"
+  },
+  "types": "./dist/index.d.ts"
+}

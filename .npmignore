@@ -1,0 +1,8 @@
+/.husky
+/src
+.commitlintrc
+.editorconfig
+.gitignore
+.prettierrc
+package-lock.json
+tsconfig.json
