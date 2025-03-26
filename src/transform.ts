@@ -22,6 +22,7 @@ interface ThemeData {
 }
 
 const getOutput = (data: ThemeData): string => {
+    const tempPrimitiveValues: { [key: string]: string } = {};
     let cssOutput = '';
     const sp = '    ';
 
@@ -29,6 +30,7 @@ const getOutput = (data: ThemeData): string => {
     for (const category in data.primitive) {
         for (const [name, values] of Object.entries(data.primitive[category])) {
             cssOutput += `${sp}--${category}-${name}: ${values.value};\n`;
+            tempPrimitiveValues[`${category}-${name}`] = values.value;
         }
     }
     cssOutput += `}\n\n`;
@@ -36,7 +38,7 @@ const getOutput = (data: ThemeData): string => {
     cssOutput += `@theme inline {\n`;
     for (const category in data.semantic) {
         for (const [name, value] of Object.entries(data.semantic[category])) {
-            cssOutput += `${sp}--color-${category}-${name}: var(--${value});\n`;
+            cssOutput += `${sp}--color-${category}-${name}: var(--${value}); /* ${tempPrimitiveValues[value]} */\n`;
         }
     }
     cssOutput += `}\n`;
@@ -46,7 +48,7 @@ const getOutput = (data: ThemeData): string => {
 const transform = (data: ThemeData): void => {
     const output = getOutput(data);
     fs.writeFileSync('theme.css', output);
-    console.log('theme generated');
+    console.log('Theme generated');
 };
 
 export default transform;

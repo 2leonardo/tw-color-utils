@@ -37,6 +37,9 @@
 ehthumbs.db
 Thumbs.db
 
+# editor settings
+.vscode/
+
 # misc
 *.pem
 
