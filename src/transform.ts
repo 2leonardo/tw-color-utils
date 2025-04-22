@@ -8,12 +8,8 @@ interface Primitive {
     [category: string]: PrimitiveValues;
 }
 
-interface SemanticValues {
-    [key: string]: string;
-}
-
 interface Semantic {
-    [category: string]: SemanticValues;
+    [name: string]: string;
 }
 
 interface ThemeData {
@@ -36,10 +32,8 @@ const getOutput = (data: ThemeData): string => {
     cssOutput += `}\n\n`;
 
     cssOutput += `@theme inline {\n`;
-    for (const category in data.semantic) {
-        for (const [name, value] of Object.entries(data.semantic[category])) {
-            cssOutput += `${sp}--color-${category}-${name}: var(--${value}); /* ${tempPrimitiveValues[value]} */\n`;
-        }
+    for (const [name, reference] of Object.entries(data.semantic)) {
+        cssOutput += `${sp}--color-${name}: ${tempPrimitiveValues[reference]};\n`;
     }
     cssOutput += `}\n`;
     return cssOutput;
