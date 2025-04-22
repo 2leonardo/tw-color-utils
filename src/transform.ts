@@ -33,7 +33,8 @@ const getOutput = (data: ThemeData): string => {
 
     cssOutput += `@theme inline {\n`;
     for (const [name, reference] of Object.entries(data.semantic)) {
-        cssOutput += `${sp}--color-${name}: ${tempPrimitiveValues[reference]};\n`;
+        cssOutput += `${sp}--color-${name}: ${tempPrimitiveValues[reference]};`;
+        cssOutput += ` /* ${reference} */\n`;
     }
     cssOutput += `}\n`;
     return cssOutput;
