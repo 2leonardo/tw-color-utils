@@ -17,9 +17,12 @@ interface ThemeData {
     semantic: Semantic;
 }
 
-const getOutput = (data: ThemeData): string => {
+const getOutput = (
+    data: ThemeData
+): { cssOutput: string; indexOutput: string } => {
     const tempPrimitiveValues: { [key: string]: string } = {};
     let cssOutput = '';
+    let indexOutput = '';
     const sp = '    ';
 
     cssOutput += `:root {\n`;
@@ -32,17 +35,30 @@ const getOutput = (data: ThemeData): string => {
     cssOutput += `}\n\n`;
 
     cssOutput += `@theme inline {\n`;
+    indexOutput += 'export const tokens = {\n';
     for (const [name, reference] of Object.entries(data.semantic)) {
-        cssOutput += `${sp}--color-${name}: ${tempPrimitiveValues[reference]};`;
+        const colorValue = tempPrimitiveValues[reference];
+        const hasDash = name.includes('-');
+        const key = hasDash ? `'${name}'` : name;
+        //* Tailwind css output
+        cssOutput += `${sp}--color-${name}: ${colorValue};`;
         cssOutput += ` /* ${reference} */\n`;
+        //* Index.js output
+        indexOutput += `${sp}${key}: '${colorValue}',\n`;
     }
     cssOutput += `}\n`;
-    return cssOutput;
+    indexOutput += `};\n`;
+
+    return {
+        cssOutput,
+        indexOutput,
+    };
 };
 
 const transform = (data: ThemeData): void => {
-    const output = getOutput(data);
-    fs.writeFileSync('theme.css', output);
+    const { cssOutput, indexOutput } = getOutput(data);
+    fs.writeFileSync('theme.css', cssOutput);
+    fs.writeFileSync('index.js', indexOutput);
     console.log('Theme generated');
 };
 

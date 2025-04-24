@@ -47,3 +47,7 @@ Thumbs.db
 /build
 /out
 /dist
+
+# custom
+/index.js
+/theme.css
