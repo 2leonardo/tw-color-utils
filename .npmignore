@@ -1,5 +1,6 @@
 /.husky
 /src
+/dist
 .commitlintrc
 .editorconfig
 .gitignore
