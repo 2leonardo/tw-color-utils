@@ -35,6 +35,7 @@ const getOutput = (
     cssOutput += `}\n\n`;
 
     cssOutput += `@theme {\n`;
+    cssOutput += `${sp}--color-*: initial;\n`;
     indexOutput += 'export const tokens = {\n';
     for (const [name, reference] of Object.entries(data.semantic)) {
         const colorValue = tempPrimitiveValues[reference];
